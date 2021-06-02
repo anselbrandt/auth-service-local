@@ -29,7 +29,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }),
   });
   const profile = await oauth.getProfile(provider as string, req);
-  res.send(profile);
+  const encoded = encodeURIComponent(JSON.stringify(profile));
+  res.redirect(`http://localhost:4000/test/?profile=${encoded}`);
 };
 
 export default handler;
